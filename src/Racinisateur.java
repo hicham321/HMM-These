@@ -201,7 +201,11 @@
 	        try {
 	            // read from the file using FileReader
 	            FileInputStream in = new FileInputStream ( currentFile );
-	            InputStreamReader str = new InputStreamReader ( in, "UTF-16" );
+	 //***************changed the value of the text format.
+	            
+	            InputStreamReader str = new InputStreamReader ( in, "UTF-8" );
+	            
+	 //**************************************************************           
 	            BufferedReader br = new BufferedReader ( str );
 
 	            // initialize index
