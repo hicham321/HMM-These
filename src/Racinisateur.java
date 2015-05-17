@@ -46,8 +46,8 @@
 	*/
 
 	import java.io.*;
-	import java.util.*;
-	import java.text.DateFormat;
+import java.util.*;
+import java.text.DateFormat;
 
 	public class Racinisateur
 	{
@@ -1217,5 +1217,73 @@
 	        }
 	        return strangeWordFound;
 	    }
+	    
+	    
+	    
+	   
+	    
+	    private Vector statfiles () throws FileNotFoundException , UnsupportedEncodingException ,IOException{
+	    	    Vector v = new Vector<>();
+	    	
+	    		File dir = new File("C:/Users/pharma/StemmerFile");
+	    		
+	    		  File[] directoryListing = dir.listFiles();
+	    		  
+	    		  if (directoryListing != null) {
+	    		    for (File child : directoryListing) {
+	    		      // Do something with child
+	    		    	
+	    		    	Vector fileVector =new Vector<>();
+	    		    	
+	    		    	FileInputStream FichierALire= new FileInputStream(child);
+	    				
+	    		    	InputStreamReader LecteurDeFichier= new InputStreamReader(FichierALire, "UTF-8");
+	    		    	
+	    		    	
+	    		    	//lecture de fichier:
+	    		    	
+	    		    	BufferedReader br = new BufferedReader(LecteurDeFichier);
+	    				
+	    			    
+	    			    
+	    				String ligne = null;
+
+	    				while( (ligne = br.readLine())!= null ){
+	    				        // \\s+ means any number of whitespaces between tokens
+	    				    String [] tokens = ligne.split("\\s+");
+	    				    for(int i=0;i< tokens.length;i++){
+	    				    	
+	    				    	fileVector.add(tokens[i]);
+	    				    
+	    				    }
+//	    				    String var_1 = tokens[0];
+//	    				    String var_2 = tokens[1];
+//	    				    String var_3 = tokens[2];
+	    				    }
+	    		    	
+	    		   
+	    		    	
+	    		    	
+	    		    	
+	    		        v.add(fileVector);
+	    		      
+	    		    }
+	    		  } else {
+	    		    // Handle the case where dir is not really a directory.
+	    		    // Checking dir.isDirectory() above would not be sufficient
+	    		    // to avoid race conditions with another process that deletes
+	    		    // directories.
+	    			  System.out.println(" Ce n'est pas une repertoire de fichiers ");
+	    		  }
+	    		
+	    	
+	    	
+	    	
+	    	
+	    	return v;
+	    }
+	  public static void main(String[] args) {
+		
+	}
 	}
 

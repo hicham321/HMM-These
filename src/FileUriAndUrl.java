@@ -7,7 +7,7 @@ import java.net.URL;
 public class FileUriAndUrl {
 	
 	public void iterateFile(){
-		File dir = new File("myDirectoryPath");
+		File dir = new File("C:/Users/pharma/StemmerFile");
 		  File[] directoryListing = dir.listFiles();
 		  if (directoryListing != null) {
 		    for (File child : directoryListing) {
