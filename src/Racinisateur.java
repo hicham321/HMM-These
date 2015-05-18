@@ -1225,7 +1225,7 @@ import java.text.DateFormat;
 	    private Vector statfiles () throws FileNotFoundException , UnsupportedEncodingException ,IOException{
 	    	    Vector v = new Vector<>();
 	    	
-	    		File dir = new File("C:/Users/pharma/StemmerFile");
+	    		File dir = new File("C:/Users/pharma/StemmerFiles");
 	    		
 	    		  File[] directoryListing = dir.listFiles();
 	    		  
@@ -1282,8 +1282,17 @@ import java.text.DateFormat;
 	    	
 	    	return v;
 	    }
-	  public static void main(String[] args) {
+	    public Racinisateur() throws IOException,FileNotFoundException,UnsupportedEncodingException{
+	    	this.statfiles();
+	    }
+	  public static void main(String[] args)throws UnsupportedEncodingException,IOException,FileNotFoundException {
 		
+		  Racinisateur rc= new Racinisateur();
+		   Vector h =rc.statfiles();
+		   for(int i=0 ;i< h.size();i++){
+			   
+		  System.out.println(h.get(i).toString());
+		   }
 	}
 	}
 
