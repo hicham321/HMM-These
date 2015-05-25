@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 public class Vectorisation {
 	private ArrayList<String> ListeDesMotFinale;
+	private ArrayList<Integer> listedesfrequence;
 	
 	public Vectorisation(ArrayList<String>ListeDesMotsFinale){
 		
@@ -21,12 +22,16 @@ public class Vectorisation {
 		int[] Vecteur=new int[10];
 		
 		
-		int compteur =0;
 		for (int i =0; i<this.ListeDesMotFinale.size();i++){
+			int compteur =0;
 			for( int j=0; j<this.ListeDesMotFinale.size();j++){
-				
-				
+				if(ListeDesMotFinale.get(i).equals(ListeDesMotFinale.get(j))){
+					
+					compteur++;
+				}
+		this.listedesfrequence.add(compteur);
 			}
+			
 		}
 		
 	}

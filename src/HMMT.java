@@ -23,10 +23,14 @@ import java.util.Vector;
 	
     //6th depending on the level of importance and the number of states we make a vector of 
 public class HMMT {
+	// LA REPERTOIRE DES FICHIERS DE CORPUS 
 	private File RepertoireDesFichiersCorpus;
 	
+	// list des veteur de chaque documenty
+	private ArrayList<ArrayList<String>> VecteurDesFichiers;
 	
 	
+	// pour lire les fichiers texte de corpus et transformer a des vecteurs
 	 private ArrayList<ArrayList<String>>   FichierAuVecteur () throws FileNotFoundException , UnsupportedEncodingException ,IOException{
  	    ArrayList<ArrayList<String>> v = new ArrayList<>();
 
@@ -88,5 +92,23 @@ public class HMMT {
  	
  	return v;
  }
+	 
+	 
+	 // le vectorisation (assigner un frequence a chaque mot de document :
+	 
+	 private void Vectorisation( ArrayList<ArrayList<String>> listeDesVecteurs){
+		 
+		 for 
+	 }
+	 
+	 //tri descendant des vecteurs
+	 private ArrayList tri(){
+		 
+		 ArrayList<ArrayList<String>> list= new ArrayList<>();
+		 
+		 return list;
+	 }
+	 
+	 
 }
 
