@@ -26,7 +26,7 @@ public class HMMT {
 	private File RepertoireDesFichiersCorpus;
 	
 	
-	
+	// step1: turning files into vectors 
 	 private ArrayList<ArrayList<String>>   FichierAuVecteur () throws FileNotFoundException , UnsupportedEncodingException ,IOException{
  	    ArrayList<ArrayList<String>> v = new ArrayList<>();
 
@@ -88,5 +88,7 @@ public class HMMT {
  	
  	return v;
  }
+	 
+	 // step 2: calculating frequency  
 }
 
