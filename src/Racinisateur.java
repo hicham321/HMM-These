@@ -1286,13 +1286,20 @@ import java.text.DateFormat;
 	    	this.statfiles();
 	    }
 	  public static void main(String[] args)throws UnsupportedEncodingException,IOException,FileNotFoundException {
-		
+		  // le fichier a raciner :
+		  
+		  	File fichierARaciner = new File("");
+		  	
+		  	// constructeur pour utiliser la methode "statfiles"
+		  	
 		  Racinisateur rc= new Racinisateur();
 		   Vector h =rc.statfiles();
+		   
 		   for(int i=0 ;i< h.size();i++){
 			   
 		  System.out.println(h.get(i).toString());
 		   }
+	
 	}
 	}
 
