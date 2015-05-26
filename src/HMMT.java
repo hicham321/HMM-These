@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.HashMap;
+import java.util.Map;
 
 // first we need to read the files of the corpus 
 	
@@ -29,17 +30,13 @@ public class HMMT {
 	// list des veteur de chaque documenty
 	private ArrayList<ArrayList<String>> VecteurDesFichiers;
 	
-<<<<<<< HEAD
-	// step1: turning files into vectors 
-=======
-	
-	// pour lire les fichiers texte de corpus et transformer a des vecteurs
->>>>>>> b087243a6cb572cc616448b62a6a477874aa7aa1
-	 private ArrayList<ArrayList<String>>   FichierAuVecteur () throws FileNotFoundException , UnsupportedEncodingException ,IOException{
- 	    ArrayList<ArrayList<String>> v = new ArrayList<>();
+
+	 private ArrayList<ArrayList<String>>   FichierAuVecteur (String LienVersRepertoire) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
+ 	    
+		 //ArrayList<ArrayList<String>> v = new ArrayList<>();
 
  	
- 		File dir = new File("repertoire des fichiers");
+ 		File dir = new File(LienVersRepertoire);
  		
  		  File[] ListeDeRepertoire = dir.listFiles();
  		  
@@ -79,7 +76,7 @@ public class HMMT {
  		    	
  		    	
  		    	
- 		        v.add(VecteurFichier);
+ 		        this.VecteurDesFichiers.add(VecteurFichier);
  		      
  		    }
  		  } else {
@@ -94,19 +91,53 @@ public class HMMT {
  	
  	
  	
- 	return v;
+ 	return VecteurDesFichiers;
  }
 	 
-<<<<<<< HEAD
-	 // step 2: calculating frequency  
-=======
+
 	 
 	 // le vectorisation (assigner un frequence a chaque mot de document :
 	 
-	 private void Vectorisation( ArrayList<ArrayList<String>> listeDesVecteurs){
+	 private ArrayList<Map<String,Integer>> Vectorisation( ArrayList<ArrayList<String>> listeDesVecteurs){
 		 
-		 for 
-	 }
+		 ArrayList<Map<String, Integer>> map=new ArrayList<>();
+		 //iterating in the list of vectors 
+		 
+		 for(int i =0; i<listeDesVecteurs.size();i++){
+		 //iterating in each vector to determin the frequency
+			 //each time we iterate a vector we create a new hash map to store the frequencies 
+			 
+			 Map<String ,Integer> vecteurDesFrequences= new HashMap<String,Integer>();
+			 for(int z=0;z<listeDesVecteurs.get(i).size();z++){
+				 
+				 vecteurDesFrequences.put(listeDesVecteurs.get(i).get(z), 1);
+			 }
+
+			 for(int j=0;j<listeDesVecteurs.get(i).size();j++){
+				 
+				 for(int k=0; k<listeDesVecteurs.get(i).size();k++){
+					 
+					 //testing if the strings are equal
+					 
+					 if(listeDesVecteurs.get(i).get(j).equals(listeDesVecteurs.get(i).get(k))){
+						 
+						 //this is a little bit complicated but it helps to consider that the key to the hash map is the value we are testing for (lisdesVecteur.get(i).get(j)
+						 vecteurDesFrequences.put(listeDesVecteurs.get(i).get(j)  ,  vecteurDesFrequences.get(listeDesVecteurs.get(i).get(j)) +1 );
+						 
+					 }
+					 
+
+				 }
+				 
+			 }
+			 //adding the newHash map to the array list	 
+
+			 map.add(vecteurDesFrequences);
+			 }
+		 return map;
+		 }
+		 
+	 
 	 
 	 //tri descendant des vecteurs
 	 private ArrayList tri(){
@@ -117,6 +148,5 @@ public class HMMT {
 	 }
 	 
 	 
->>>>>>> b087243a6cb572cc616448b62a6a477874aa7aa1
 }
 
