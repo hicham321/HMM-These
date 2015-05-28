@@ -140,7 +140,18 @@ public class HMMT {
 	 
 	 
 	 //tri descendant des vecteurs
-	 private ArrayList tri(){
+	 // to sort the hash map we can put the contents(keys) of the hash map in an array list, 
+	 private ArrayList tri(ArrayList<HashMap<String, Integer>> map){
+		 
+		 //once we put the sorted content of the hash map in an array list we can then use the list directly .
+		 // iterate through the hash map and put it in an array and sort it 
+		 for(int i =0; i<map.size();i++){
+			 
+			 for(int j=0; j<map.get(i).size();j++){
+				 
+				 
+			 }
+		 }
 		 
 		 ArrayList<ArrayList<String>> list= new ArrayList<>();
 		 
