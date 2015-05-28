@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 
-public class StopWord {
+public class StopWord   {
 	
 	
 	private FileInputStream fichtxt;

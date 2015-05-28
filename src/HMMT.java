@@ -27,8 +27,13 @@ public class HMMT {
 	// LA REPERTOIRE DES FICHIERS DE CORPUS 
 	private File RepertoireDesFichiersCorpus;
 	
-	// list des veteur de chaque documenty
+	// list des vecteur de chaque documenty
 	private ArrayList<ArrayList<String>> VecteurDesFichiers;
+	
+	public HMMT (String repertoire) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
+		ArrayList<ArrayList<String>> list=FichierAuVecteur(repertoire);
+		
+	}
 	
 
 	 private ArrayList<ArrayList<String>>   FichierAuVecteur (String LienVersRepertoire) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
