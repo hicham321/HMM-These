@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 // first we need to read the files of the corpus 
 	
@@ -27,9 +30,16 @@ public class HMMT {
 	// LA REPERTOIRE DES FICHIERS DE CORPUS 
 	private File RepertoireDesFichiersCorpus;
 	
-	// list des vecteur de chaque documenty
+	// list des vecteur de chaque document
 	private ArrayList<ArrayList<String>> VecteurDesFichiers;
 	
+	//Hashmap pour memoriser les frequeces de chaque mot 
+	
+	 ArrayList<Map<String, Integer>> map=new ArrayList<>();
+	 
+	 //list des mots tries
+	 ArrayList<ArrayList<String>> listDesMotsTries=new ArrayList<ArrayList<String>>();
+
 	public HMMT (String repertoire) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
 		ArrayList<ArrayList<String>> list=FichierAuVecteur(repertoire);
 		
@@ -105,7 +115,6 @@ public class HMMT {
 	 
 	 private ArrayList<Map<String,Integer>> Vectorisation( ArrayList<ArrayList<String>> listeDesVecteurs){
 		 
-		 ArrayList<Map<String, Integer>> map=new ArrayList<>();
 		 //iterating in the list of vectors 
 		 
 		 for(int i =0; i<listeDesVecteurs.size();i++){
@@ -137,7 +146,7 @@ public class HMMT {
 			 }
 			 //adding the newHash map to the array list	 
 
-			 map.add(vecteurDesFrequences);
+			 this.map.add(vecteurDesFrequences);
 			 }
 		 return map;
 		 }
@@ -146,21 +155,31 @@ public class HMMT {
 	 
 	 //tri descendant des vecteurs
 	 // to sort the hash map we can put the contents(keys) of the hash map in an array list, 
-	 private ArrayList tri(ArrayList<HashMap<String, Integer>> map){
+	 private void tri(ArrayList<HashMap<String, Integer>> map){
 		 
 		 //once we put the sorted content of the hash map in an array list we can then use the list directly .
 		 // iterate through the hash map and put it in an array and sort it 
+		 
+		 
+		 //turn the array list into a set 
+
 		 for(int i =0; i<map.size();i++){
 			 
-			 for(int j=0; j<map.get(i).size();j++){
+			 ArrayList<String> sousListTrie=new ArrayList<String>();
+			 for(int j =0;j<map.get(i).size();j++){
 				 
-				 
+				    Integer maxValue=Collections.max(map.get(i).values());
+				    for(String mot :map.get(i).keySet()){
+				    	if(map.get(i).get(mot)==maxValue){
+				    		sousListTrie.add(mot);
+				    		map.get(i).remove(mot, maxValue);
+				    	}
+				    }
 			 }
+			this.listDesMotsTries.add(sousListTrie);
 		 }
 		 
-		 ArrayList<ArrayList<String>> list= new ArrayList<>();
 		 
-		 return list;
 	 }
 	 
 	 
