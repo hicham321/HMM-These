@@ -1284,7 +1284,7 @@ import java.text.DateFormat;
 	    }
 	    public Racinisateur() throws IOException,FileNotFoundException,UnsupportedEncodingException{
 	    	this.statfiles();
-	    }
+	    }  
 	  public static void main(String[] args)throws UnsupportedEncodingException,IOException,FileNotFoundException {
 		  // le fichier a raciner :
 		  
