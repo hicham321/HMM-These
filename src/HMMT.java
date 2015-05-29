@@ -8,9 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 // first we need to read the files of the corpus 
 	
@@ -20,9 +18,9 @@ import java.util.Set;
 	
 	//forthly we need to assign frequency for each word in each document 
 	
-	//Fifthly we need need to extract the most important words , we need to classify it from the most
+	//Fifthly we need  to extract the most important words , we need to classify it from the most
 	  //....important to the least important depending on their frequency
-      //after this stage we have a collection of words in each vector representng each document from  
+      //after this stage we have a collection of words in each vector representing each document from  
 	  //...the most important to the least important word
 	
     //6th depending on the level of importance and the number of states we make a vector of 
@@ -138,6 +136,8 @@ public class HMMT {
 						 //this is a little bit complicated but it helps to consider that the key to the hash map is the value we are testing for (lisdesVecteur.get(i).get(j)
 						 vecteurDesFrequences.put(listeDesVecteurs.get(i).get(j)  ,  vecteurDesFrequences.get(listeDesVecteurs.get(i).get(j)) +1 );
 						 
+						 //*****note that this step migh erase some problems when testing ****
+						 listeDesVecteurs.get(i).remove(j);
 					 }
 					 
 
@@ -161,8 +161,7 @@ public class HMMT {
 		 // iterate through the hash map and put it in an array and sort it 
 		 
 		 
-		 //turn the array list into a set 
-
+          //in case of undefined behaviour use the iterator for removing hashmap or list enteries as suggested in the oracle documentations
 		 for(int i =0; i<map.size();i++){
 			 
 			 ArrayList<String> sousListTrie=new ArrayList<String>();
@@ -173,6 +172,7 @@ public class HMMT {
 				    	if(map.get(i).get(mot)==maxValue){
 				    		sousListTrie.add(mot);
 				    		map.get(i).remove(mot, maxValue);
+				    		break;
 				    	}
 				    }
 			 }
@@ -182,6 +182,15 @@ public class HMMT {
 		 
 	 }
 	 
+	 // this method will make states (without probability) from the previous data 
+	 public ArrayList<ArrayList<String>> Etat(){
+		 //we need each word in the lists 
+		 //iterate through the liste of arrays and each array and make a global...
+		 //arraylist that has no duplicates   
+		 
+		 ArrayList<ArrayList<String>> k =new ArrayList<>();
+		 return k;
+	 }
 	 
 }
 
