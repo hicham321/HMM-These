@@ -28,6 +28,7 @@ public class HMMT {
 	// LA REPERTOIRE DES FICHIERS DE CORPUS 
 	private File RepertoireDesFichiersCorpus;
 	
+	
 	// list des vecteur de chaque document
 	private ArrayList<ArrayList<String>> VecteurDesFichiers;
 	
@@ -100,7 +101,6 @@ public class HMMT {
  			  System.out.println(" Ce n'est pas une repertoire de fichiers ");
  		  }
  		
- 	
  	
  	
  	
@@ -183,12 +183,13 @@ public class HMMT {
 	 }
 	 
 	 // this method will make states (without probability) from the previous data 
-	 public ArrayList<ArrayList<String>> Etat(){
+	 //this method willl generate the states depending on the parameter number n
+	 private ArrayList<HashMap<String, Integer>> Etats(int nbrEtat){
 		 //we need each word in the lists 
 		 //iterate through the liste of arrays and each array and make a global...
 		 //arraylist that has no duplicates   
 		 
-		 ArrayList<ArrayList<String>> k =new ArrayList<>();
+		 ArrayList<HashMap<String, Integer>> k =new ArrayList<>();
 		 return k;
 	 }
 	 
