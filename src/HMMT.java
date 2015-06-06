@@ -187,10 +187,27 @@ public class HMMT {
 	 private ArrayList<HashMap<String, Integer>> Etats(int nbrEtat){
 		 //we need each word in the lists 
 		 //iterate through the liste of arrays and each array and make a global...
-		 //arraylist that has no duplicates   
+		 //arraylist that has no duplicates
+		 ArrayList<HashMap<String, Integer>> listedesprobability1=new ArrayList<>();
+		 for(int i=0; i<nbrEtat;i++){
+			 HashMap<String, Integer> occurenceDansEtat =new HashMap<>();
+             
+			 boolean premierIteration =true;
+			 int compteurDeMot=1;
+			 String s="";
+		     for(ArrayList<String> m:this.listDesMotsTries){
+			     if(premierIteration){
+			      s= m.get(i);
+			     }
+			     if(m.get(i).equals(s) && premierIteration==false){
+			    	compteurDeMot++; 
+			     }
+			     premierIteration=false;
+		     }
+		 }
 		 
 		 ArrayList<HashMap<String, Integer>> k =new ArrayList<>();
-		 return k;
+		 return k; 
 	 }
 	 
 }
