@@ -38,6 +38,10 @@ public class HMMT {
 	 
 	 //list des mots tries
 	 ArrayList<ArrayList<String>> listDesMotsTries=new ArrayList<ArrayList<String>>();
+	 
+	 //Adding another list that contains all the possible words in every document (should...
+	 //shoose a data structure that eliminates duplicates by itself 
+	 //this structure will be used to build the states .
 
 	public HMMT (String repertoire) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
 		ArrayList<ArrayList<String>> list=FichierAuVecteur(repertoire);
@@ -189,22 +193,34 @@ public class HMMT {
 		 //iterate through the liste of arrays and each array and make a global...
 		 //arraylist that has no duplicates
 		 ArrayList<HashMap<String, Integer>> listedesprobability1=new ArrayList<>();
+		 
+		 ArrayList<ArrayList<String>> biggerDummyArrayList=new ArrayList<ArrayList<String>>();
+		 
 		 for(int i=0; i<nbrEtat;i++){
-			 HashMap<String, Integer> occurenceDansEtat =new HashMap<>();
-             
-			 boolean premierIteration =true;
-			 int compteurDeMot=1;
-			 String s="";
+			 ArrayList<String> dummyArrayList=new ArrayList<>();
+
 		     for(ArrayList<String> m:this.listDesMotsTries){
-			     if(premierIteration){
-			      s= m.get(i);
-			     }
-			     if(m.get(i).equals(s) && premierIteration==false){
-			    	compteurDeMot++; 
-			     }
-			     premierIteration=false;
+		    	 
+				dummyArrayList.add(m.get(i)) ;
+
 		     }
+		    biggerDummyArrayList.add(dummyArrayList);
 		 }
+		 //this will only count the frequence of the words in the interval of nbretat , the rest of words..
+		 //..will be added next when checking with the hashmap(we will ad 1)
+		 for(int k=0; k<biggerDummyArrayList.size();k++){
+			 for(int z=0;z<biggerDummyArrayList.get(k).size();k++){
+				 int compteur=0;
+				 for(int l=0;l<biggerDummyArrayList.get(k).size();l++){
+					 if(biggerDummyArrayList.get(k).get(z).equals(biggerDummyArrayList.get(k).get(l))){
+						 
+						 compteur++;
+					 }
+				 }
+			 }
+		 }
+		 
+		 
 		 
 		 ArrayList<HashMap<String, Integer>> k =new ArrayList<>();
 		 return k; 
