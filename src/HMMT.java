@@ -208,7 +208,10 @@ public class HMMT {
 		 }
 		 //this will only count the frequence of the words in the interval of nbretat , the rest of words..
 		 //..will be added next when checking with the hashmap(we will ad 1)
+		 ArrayList<HashMap<String, Integer>> listeDesoccurenceParNiveau=new ArrayList<>();
 		 for(int k=0; k<biggerDummyArrayList.size();k++){
+			 HashMap<String, Integer> OccurenceDansNiveau=new HashMap<>();
+
 			 for(int z=0;z<biggerDummyArrayList.get(k).size();k++){
 				 int compteur=0;
 				 for(int l=0;l<biggerDummyArrayList.get(k).size();l++){
@@ -217,9 +220,17 @@ public class HMMT {
 						 compteur++;
 					 }
 				 }
+				 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(k), compteur);
+			 }
+			 listeDesoccurenceParNiveau.add(OccurenceDansNiveau);
+		 }
+		 // Iterate through the list of occurences in every level and find the number of words in all of the hashmaps
+		  
+		 for (int i=0;i<listeDesoccurenceParNiveau.size();i++){
+			 for(int j=0;j){
+				 
 			 }
 		 }
-		 
 		 
 		 
 		 ArrayList<HashMap<String, Integer>> k =new ArrayList<>();
