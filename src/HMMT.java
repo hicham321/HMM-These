@@ -192,7 +192,6 @@ public class HMMT {
 		 //we need each word in the lists 
 		 //iterate through the liste of arrays and each array and make a global...
 		 //arraylist that has no duplicates
-		 ArrayList<HashMap<String, Integer>> listedesprobability1=new ArrayList<>();
 		 
 		 ArrayList<ArrayList<String>> biggerDummyArrayList=new ArrayList<ArrayList<String>>();
 		 
@@ -224,13 +223,18 @@ public class HMMT {
 			 }
 			 listeDesoccurenceParNiveau.add(OccurenceDansNiveau);
 		 }
-		 // Iterate through the list of occurences in every level and find the number of words in all of the hashmaps
-		  
-		 for (int i=0;i<listeDesoccurenceParNiveau.size();i++){
-			 for(int j=0;j){
-				 
+		 // Make another dummy list of all the words and count the frequency of words based on those occurences
+		 ArrayList<String> DummylistOfAllDocuments =new ArrayList<String>();
+		 for(ArrayList<String> m:this.listDesMotsTries){
+			 for(int j=0;j<m.size();j++){
+	    	 
+				DummylistOfAllDocuments.add(m.get(j)) ;
 			 }
-		 }
+
+		 }	 
+				 
+			 
+		 
 		 
 		 
 		 ArrayList<HashMap<String, Integer>> k =new ArrayList<>();
