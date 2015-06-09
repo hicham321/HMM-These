@@ -231,7 +231,19 @@ public class HMMT {
 				DummylistOfAllDocuments.add(m.get(j)) ;
 			 }
 
-		 }	 
+		 }
+		 //calculating the frequency
+		 HashMap<String, Integer> hashForFrequencies=new HashMap<>();
+		 for (int i=0; i< DummylistOfAllDocuments.size();i++){
+			 int compteur=0;
+			 for(int j=0;j<DummylistOfAllDocuments.size();j++){
+				 
+				 if(DummylistOfAllDocuments.get(i).equals(DummylistOfAllDocuments.get(j))){
+					compteur++; 
+				 }
+			 }
+			 hashForFrequencies.put(DummylistOfAllDocuments.get(i), compteur);
+		 }
 				 
 			 
 		 
