@@ -34,10 +34,21 @@ public class HMMT {
 	
 	//Hashmap pour memoriser les frequeces de chaque mot 
 	
-	 ArrayList<Map<String, Integer>> map=new ArrayList<>();
+	private ArrayList<Map<String, Integer>> map=new ArrayList<>();
 	 
 	 //list des mots tries
-	 ArrayList<ArrayList<String>> listDesMotsTries=new ArrayList<ArrayList<String>>();
+	private ArrayList<ArrayList<String>> listDesMotsTries=new ArrayList<ArrayList<String>>();
+	 
+	 //liste de tout les mot du corpus(pas de duplication)
+	private ArrayList<String> listeFinal =new ArrayList<String>();
+	//liste des occurences des mot dans chaque niveau d'impostance (inferieur au nombre d'etat:nbrEtat)
+	private ArrayList<HashMap<String, Integer>> listeDesoccurenceParNiveau=new ArrayList<HashMap<String,Integer>>();
+	//la somme de nombre d'occurence de tout les mots dans le corpus
+	private int SommeFrequence;
+	
+	private HashMap<String, Integer> hashForFrequencies=new HashMap<>();
+
+	
 	 
 	 //Adding another list that contains all the possible words in every document (should...
 	 //shoose a data structure that eliminates duplicates by itself 
@@ -186,8 +197,6 @@ public class HMMT {
 		 
 	 }
 	 
-	 // this method will make states (without probability) from the previous data 
-	 //this method willl generate the states depending on the parameter number n
 	 private ArrayList<HashMap<String, Integer>> Etats(int nbrEtat){
 		 //we need each word in the lists 
 		 //iterate through the liste of arrays and each array and make a global...
@@ -207,7 +216,6 @@ public class HMMT {
 		 }
 		 //this will only count the frequence of the words in the interval of nbretat , the rest of words..
 		 //..will be added next when checking with the hashmap(we will ad 1)
-		 ArrayList<HashMap<String, Integer>> listeDesoccurenceParNiveau=new ArrayList<>();
 		 for(int k=0; k<biggerDummyArrayList.size();k++){
 			 HashMap<String, Integer> OccurenceDansNiveau=new HashMap<>();
 
@@ -221,7 +229,7 @@ public class HMMT {
 				 }
 				 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(k), compteur);
 			 }
-			 listeDesoccurenceParNiveau.add(OccurenceDansNiveau);
+			 this.listeDesoccurenceParNiveau.add(OccurenceDansNiveau);
 		 }
 		 // Make another dummy list of all the words and count the frequency of words based on those occurences
 		 ArrayList<String> DummylistOfAllDocuments =new ArrayList<String>();
@@ -232,8 +240,8 @@ public class HMMT {
 			 }
 
 		 }
-		 //calculating the frequency
-		 HashMap<String, Integer> hashForFrequencies=new HashMap<>();
+		  this.SommeFrequence=DummylistOfAllDocuments.size();
+		 //calculating the frequency of every word in all of the corpus
 		 for (int i=0; i< DummylistOfAllDocuments.size();i++){
 			 int compteur=0;
 			 for(int j=0;j<DummylistOfAllDocuments.size();j++){
@@ -242,15 +250,38 @@ public class HMMT {
 					compteur++; 
 				 }
 			 }
-			 hashForFrequencies.put(DummylistOfAllDocuments.get(i), compteur);
+			 this.hashForFrequencies.put(DummylistOfAllDocuments.get(i), compteur);
 		 }
 				 
 			 
 		 
 		 
-		 
 		 ArrayList<HashMap<String, Integer>> k =new ArrayList<>();
 		 return k; 
+	 }
+	 private void calcProbabilite(double f,int nbrEtat){
+		 
+		 ArrayList<HashMap<String, Integer>> listDeMapDeProba= new ArrayList();
+		 for(int i=0;i<nbrEtat;i++){
+			 HashMap<String, Integer> mapDeProba= new HashMap<>();
+
+			 for(int j =0; j<this.listeFinal.size();j++){
+				String MOT= this.listeFinal.get(j) ;
+				
+				int FrequenceDuMot=this.hashForFrequencies.get(MOT);
+				
+				int frequenceParNiveau=0;
+				if(listeDesoccurenceParNiveau.get(i).containsKey(MOT)){
+					 frequenceParNiveau =listeDesoccurenceParNiveau.get(i).get(MOT);
+				}
+				int ProbabiliteDeMot=f*
+					
+				 
+			 }
+		 }
+		 
+		 
+		 
 	 }
 	 
 }
