@@ -151,7 +151,7 @@ public class HMMT {
 						 //this is a little bit complicated but it helps to consider that the key to the hash map is the value we are testing for (lisdesVecteur.get(i).get(j)
 						 vecteurDesFrequences.put(listeDesVecteurs.get(i).get(j)  ,  vecteurDesFrequences.get(listeDesVecteurs.get(i).get(j)) +1 );
 						 
-						 //*****note that this step migh erase some problems when testing ****
+						 //*****note that this step might rise some problems when testing ****
 						 listeDesVecteurs.get(i).remove(j);
 					 }
 					 
