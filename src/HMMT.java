@@ -135,29 +135,30 @@ public class HMMT {
 			 //each time we iterate a vector we create a new hash map to store the frequencies 
 			 
 			 Map<String ,Integer> vecteurDesFrequences= new HashMap<String,Integer>();
-			 for(int z=0;z<listeDesVecteurs.get(i).size();z++){
+			 /*for(int z=0;z<listeDesVecteurs.get(i).size();z++){
 				 
 				 vecteurDesFrequences.put(listeDesVecteurs.get(i).get(z), 1);
-			 }
+			 }*/
 
 			 for(int j=0;j<listeDesVecteurs.get(i).size();j++){
-				 
+				 int compteur=0;
 				 for(int k=0; k<listeDesVecteurs.get(i).size();k++){
 					 
 					 //testing if the strings are equal
 					 
 					 if(listeDesVecteurs.get(i).get(j).equals(listeDesVecteurs.get(i).get(k))){
 						 
-						 //this is a little bit complicated but it helps to consider that the key to the hash map is the value we are testing for (lisdesVecteur.get(i).get(j)
+						 /*//this is a little bit complicated but it helps to consider that the key to the hash map is the value we are testing for (lisdesVecteur.get(i).get(j)
 						 vecteurDesFrequences.put(listeDesVecteurs.get(i).get(j)  ,  vecteurDesFrequences.get(listeDesVecteurs.get(i).get(j)) +1 );
 						 
-						 //*****note that this step migh erase some problems when testing ****
-						 listeDesVecteurs.get(i).remove(j);
+						 //*****note that this step might rise some problems when testing ****
+						 listeDesVecteurs.get(i).remove(j);*/
+						 compteur++;
 					 }
-					 
 
 				 }
-				 
+				 vecteurDesFrequences.put(listeDesVecteurs.get(i).get(j),compteur);
+
 			 }
 			 //adding the newHash map to the array list	 
 
@@ -180,7 +181,7 @@ public class HMMT {
 		 for(int i =0; i<map.size();i++){
 			 
 			 ArrayList<String> sousListTrie=new ArrayList<String>();
-			 for(int j =0;j<map.get(i).size();j++){
+			 while(map.get(i).size() !=0){
 				 
 				    Integer maxValue=Collections.max(map.get(i).values());
 				    for(String mot :map.get(i).keySet()){
@@ -251,6 +252,7 @@ public class HMMT {
 				 }
 			 }
 			 this.hashForFrequencies.put(DummylistOfAllDocuments.get(i), compteur);
+			 //here you can add DummyListOfAllDocuments.Remove(DummyListOfAllDocuments.get(i)) to increase performance
 		 }
 				 
 			 
