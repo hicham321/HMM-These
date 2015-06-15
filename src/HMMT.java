@@ -30,6 +30,7 @@ public class HMMT {
 	
 	
 	// list des vecteur de chaque document
+	
 	private ArrayList<ArrayList<String>> VecteurDesFichiers;
 	
 	//Hashmap pour memoriser les frequeces de chaque mot 
@@ -37,16 +38,24 @@ public class HMMT {
 	private ArrayList<Map<String, Integer>> map=new ArrayList<>();
 	 
 	 //list des mots tries
+	
 	private ArrayList<ArrayList<String>> listDesMotsTries=new ArrayList<ArrayList<String>>();
 	 
 	 //liste de tout les mot du corpus(pas de duplication)
+	
 	private ArrayList<String> listeFinal =new ArrayList<String>();
+	
 	//liste des occurences des mot dans chaque niveau d'impostance (inferieur au nombre d'etat:nbrEtat)
+	
 	private ArrayList<HashMap<String, Integer>> listeDesoccurenceParNiveau=new ArrayList<HashMap<String,Integer>>();
+	
 	//la somme de nombre d'occurence de tout les mots dans le corpus
+	
 	private int SommeFrequence;
 	
 	private HashMap<String, Integer> hashForFrequencies=new HashMap<>();
+	
+	private int NombreDeDocuments;
 
 	
 	 
@@ -69,6 +78,7 @@ public class HMMT {
  		
  		  File[] ListeDeRepertoire = dir.listFiles();
  		  
+ 		  int compteur =0;
  		  if (ListeDeRepertoire != null) {
  		    for (File child : ListeDeRepertoire) {
  		      // Do something with child
@@ -106,6 +116,7 @@ public class HMMT {
  		    	
  		    	
  		        this.VecteurDesFichiers.add(VecteurFichier);
+ 		        compteur++;
  		      
  		    }
  		  } else {
@@ -116,7 +127,7 @@ public class HMMT {
  			  System.out.println(" Ce n'est pas une repertoire de fichiers ");
  		  }
  		
- 	
+ 	this.NombreDeDocuments=compteur;
  	
  	
  	return VecteurDesFichiers;
@@ -171,23 +182,23 @@ public class HMMT {
 	 
 	 //tri descendant des vecteurs
 	 // to sort the hash map we can put the contents(keys) of the hash map in an array list, 
-	 private void tri(ArrayList<HashMap<String, Integer>> map){
+	 private void tri(){
 		 
 		 //once we put the sorted content of the hash map in an array list we can then use the list directly .
 		 // iterate through the hash map and put it in an array and sort it 
 		 
 		 
           //in case of undefined behaviour use the iterator for removing hashmap or list enteries as suggested in the oracle documentations
-		 for(int i =0; i<map.size();i++){
+		 for(int i =0; i<this.map.size();i++){
 			 
 			 ArrayList<String> sousListTrie=new ArrayList<String>();
-			 while(map.get(i).size() !=0){
+			 while(this.map.get(i).size() !=0){
 				 
-				    Integer maxValue=Collections.max(map.get(i).values());
-				    for(String mot :map.get(i).keySet()){
-				    	if(map.get(i).get(mot)==maxValue){
+				    Integer maxValue=Collections.max(this.map.get(i).values());
+				    for(String mot :this.map.get(i).keySet()){
+				    	if(this.map.get(i).get(mot)==maxValue){
 				    		sousListTrie.add(mot);
-				    		map.get(i).remove(mot, maxValue);
+				    		this.map.get(i).remove(mot, maxValue);
 				    		break;
 				    	}
 				    }
@@ -265,7 +276,7 @@ public class HMMT {
 		 
 		 ArrayList<HashMap<String, Integer>> listDeMapDeProba= new ArrayList();
 		 for(int i=0;i<nbrEtat;i++){
-			 HashMap<String, Integer> mapDeProba= new HashMap<>();
+			 HashMap<String, Double> Etat= new HashMap<>();
 
 			 for(int j =0; j<this.listeFinal.size();j++){
 				String MOT= this.listeFinal.get(j) ;
@@ -276,9 +287,10 @@ public class HMMT {
 				if(listeDesoccurenceParNiveau.get(i).containsKey(MOT)){
 					 frequenceParNiveau =listeDesoccurenceParNiveau.get(i).get(MOT);
 				}
-				int ProbabiliteDeMot=f*
+				double ProbabiliteDeMot= f * frequenceParNiveau/this.NombreDeDocuments +(1-f)*FrequenceDuMot/this.SommeFrequence;
 					
-				 
+				 Etat.put(MOT, ProbabiliteDeMot);
+ 
 			 }
 		 }
 		 
