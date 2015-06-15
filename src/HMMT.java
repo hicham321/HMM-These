@@ -238,7 +238,8 @@ public class HMMT {
 						 compteur++;
 					 }
 				 }
-				 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(k), compteur);
+				 //possible mistake here replace .get(z) with .get(k)
+				 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(z), compteur);
 			 }
 			 this.listeDesoccurenceParNiveau.add(OccurenceDansNiveau);
 		 }

@@ -63,6 +63,7 @@ private File RepertoireDesFichiersCorpus;
 		/*for(int i=0; i<this.listDesMotsTries.size();i++){
 		System.out.println(this.listDesMotsTries.get(i));	
 		}*/
+		Etats(4);
 		
 	}
 	
@@ -164,7 +165,7 @@ private File RepertoireDesFichiersCorpus;
 	 }
  
  
- private ArrayList<HashMap<String, Integer>> Etats(int nbrEtat){
+ private void Etats(int nbrEtat){
 	
 	 ArrayList<ArrayList<String>> biggerDummyArrayList=new ArrayList<ArrayList<String>>();
 	 
@@ -181,7 +182,7 @@ private File RepertoireDesFichiersCorpus;
 	 for(int k=0; k<biggerDummyArrayList.size();k++){
 		 HashMap<String, Integer> OccurenceDansNiveau=new HashMap<>();
 
-		 for(int z=0;z<biggerDummyArrayList.get(k).size();k++){
+		 for(int z=0;z<biggerDummyArrayList.get(k).size();z++){
 			 int compteur=0;
 			 for(int l=0;l<biggerDummyArrayList.get(k).size();l++){
 				 if(biggerDummyArrayList.get(k).get(z).equals(biggerDummyArrayList.get(k).get(l))){
@@ -189,6 +190,7 @@ private File RepertoireDesFichiersCorpus;
 					 compteur++;
 				 }
 			 }
+			 //possible mistake
 			 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(k), compteur);
 		 }
 		 this.listeDesoccurenceParNiveau.add(OccurenceDansNiveau);
@@ -219,8 +221,6 @@ private File RepertoireDesFichiersCorpus;
 		 
 	 
 	 
-	 ArrayList<HashMap<String, Integer>> k =new ArrayList<>();
-	 return k; 
  }
 	
 	public static void main(String[] args) throws UnsupportedEncodingException,FileNotFoundException,IOException {
