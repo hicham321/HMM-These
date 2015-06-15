@@ -16,17 +16,9 @@ public class testerHashmap {
 		
 		ArrayList<String> list=st.EliminerStopWord();
 		
-//		for(int i =0; i<list.size();i++){
-//			
-//			System.out.println(" "+list.get(i));
-//		}
-		//use hash map here to test:
+
 		Map <String,Integer> mapfortext=new HashMap<String,Integer>();
-		/*for(int i=0; i<list.size();i++){
-			mapfortext.put(list.get(i), 1);
-			
-		}*/
-		//System.out.println(mapfortext);
+		
 		
 		for(int k=0;k<list.size();k++){
 			int compteur=0;
@@ -35,20 +27,17 @@ public class testerHashmap {
 				if(list.get(k).equals(list.get(j))){
 					
 					compteur++;
-					//mapfortext.put(list.get(k), mapfortext.get(list.get(k))+1);
-					// list.remove(k);
+					
 				}
 			}
 
 			mapfortext.put(list.get(k), compteur);
 		}
-		//System.out.println(mapfortext);
 
 
 
 		 ArrayList<String> sousListTrie=new ArrayList<String>();
 
-		//for(int j =0;j<mapfortext.size();j++){
 		while(mapfortext.size() !=0){	 
 		    Integer maxValue=Collections.max(mapfortext.values());
 		    for(String mot :mapfortext.keySet()){
@@ -59,12 +48,7 @@ public class testerHashmap {
 		    	}
 		    }
 		}
-	// }
-		//System.out.println(list);
-		//System.out.println(sousListTrie);
-		
-		
-		//System.out.println("list"+list.size()+"map"+mapfortext.size()+"trie"+sousListTrie.size());
+	
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime);
         System.out.println(duration/1000000 +" miliseconds");
