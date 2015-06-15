@@ -12,7 +12,9 @@ public class Classification {
 	
 	
 private void TreatmentDocument() throws FileNotFoundException,UnsupportedEncodingException,IOException{
-	StopWord st =new StopWord("fichier a classer");
+	
+	File file= new File("fichier a classer");
+	StopWord st =new StopWord(file);
 	
 	ArrayList<String>list=st.EliminerStopWord();
 	//etape de victorization
@@ -53,4 +55,11 @@ private void TreatmentDocument() throws FileNotFoundException,UnsupportedEncodin
  	
    
 }
+    public static void main(String[] args) {
+	long startTime = System.nanoTime();
+    //code 
+	long endTime = System.nanoTime();
+	long duration = (endTime - startTime);
+    System.out.println(duration/1000000 +" miliseconds");
+    }
 }

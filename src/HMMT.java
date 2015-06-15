@@ -71,7 +71,6 @@ public class HMMT {
 
 	 private ArrayList<ArrayList<String>>   FichierAuVecteur (String LienVersRepertoire) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
  	    
-		 //ArrayList<ArrayList<String>> v = new ArrayList<>();
 
  	
  		File dir = new File(LienVersRepertoire);
