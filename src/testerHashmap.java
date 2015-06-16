@@ -64,6 +64,11 @@ private File RepertoireDesFichiersCorpus;
 		System.out.println(this.listDesMotsTries.get(i));	
 		}*/
 		Etats(4);
+		// occurence par niveau works
+		for(int i=0;i<listeDesoccurenceParNiveau.size();i++){
+			
+			System.out.println(listeDesoccurenceParNiveau);
+		}
 		
 	}
 	
@@ -191,7 +196,7 @@ private File RepertoireDesFichiersCorpus;
 				 }
 			 }
 			 //possible mistake
-			 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(k), compteur);
+			 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(z), compteur);
 		 }
 		 this.listeDesoccurenceParNiveau.add(OccurenceDansNiveau);
 	 }
