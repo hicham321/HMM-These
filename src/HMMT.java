@@ -71,7 +71,6 @@ public class HMMT {
 
 	 private ArrayList<ArrayList<String>>   FichierAuVecteur (String LienVersRepertoire) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
  	    
-		 //ArrayList<ArrayList<String>> v = new ArrayList<>();
 
  	
  		File dir = new File(LienVersRepertoire);
@@ -239,7 +238,8 @@ public class HMMT {
 						 compteur++;
 					 }
 				 }
-				 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(k), compteur);
+				 //possible mistake here replace .get(z) with .get(k)
+				 OccurenceDansNiveau.put(biggerDummyArrayList.get(k).get(z), compteur);
 			 }
 			 this.listeDesoccurenceParNiveau.add(OccurenceDansNiveau);
 		 }

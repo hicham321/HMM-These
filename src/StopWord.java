@@ -1,9 +1,11 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream.GetField;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class StopWord   {
 	private ArrayList<String> ListeDesStopWord;
 	
 	
-	public StopWord(String fichiertext) throws IOException,FileNotFoundException,UnsupportedEncodingException{
+	public StopWord(File fichiertext) throws IOException,FileNotFoundException,UnsupportedEncodingException{
 		
 		this.fichtxt= new FileInputStream(fichiertext);
 		
@@ -151,15 +153,20 @@ public class StopWord   {
 	}
 	
 	
-
+    public ArrayList<String> getListedesmot(){
+    	
+    	return this.ListeDesMots ;
+    }
 	
 	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException,IOException {
 		
       // l'utilistateur programeur peut ajouter un lien vers le fichier text qu'il veut faire eleminer les stop words 
 	  // l'utilisateur doit pas modifier ou manipuler les stop words .
 		// la resultat finale doit affiche le texte avec l'elimination des Stop words .
+		File file= new File("C:/Users/Hicham/Desktop/stop-words_arabic_1_ar.txt");
+		File file2= new File("liens vers la ripertoire des fichiers dans le stock ");
 		
-		StopWord StopWordObject= new StopWord("C:/Users/Hicham/Desktop/stop-words_arabic_1_ar.txt");
+		StopWord StopWordObject= new StopWord(file);
 		
 		ArrayList<String> list=  StopWordObject.EliminerStopWord();
 		// affichage des mot finale
