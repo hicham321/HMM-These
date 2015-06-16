@@ -63,12 +63,16 @@ private File RepertoireDesFichiersCorpus;
 		/*for(int i=0; i<this.listDesMotsTries.size();i++){
 		System.out.println(this.listDesMotsTries.get(i));	
 		}*/
+		//this method works 
 		Etats(4);
 		// occurence par niveau works
-		for(int i=0;i<listeDesoccurenceParNiveau.size();i++){
+		/*for(int i=0;i<listeDesoccurenceParNiveau.size();i++){
 			
 			System.out.println(listeDesoccurenceParNiveau);
 		}
+			System.out.println(hashForFrequencies);*/
+		
+		//testing for the probability method 
 		
 	}
 	

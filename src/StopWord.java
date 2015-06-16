@@ -164,6 +164,7 @@ public class StopWord   {
 	  // l'utilisateur doit pas modifier ou manipuler les stop words .
 		// la resultat finale doit affiche le texte avec l'elimination des Stop words .
 		File file= new File("C:/Users/Hicham/Desktop/stop-words_arabic_1_ar.txt");
+		File file2= new File("liens vers la ripertoire des fichiers dans le stock ");
 		
 		StopWord StopWordObject= new StopWord(file);
 		
