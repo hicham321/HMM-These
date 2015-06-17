@@ -1,17 +1,14 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
-import javax.swing.ListModel;
 
 
 public class testerHashmap {
@@ -19,7 +16,7 @@ private File RepertoireDesFichiersCorpus;
 	
 	
 	// list des vecteur de chaque document
-    private ArrayList<ArrayList<String>> VecteurDesFichiers=new ArrayList<ArrayList<String>>();
+    public ArrayList<ArrayList<String>> VecteurDesFichiers=new ArrayList<ArrayList<String>>();
 
 	
 	//Hashmap pour memoriser les frequeces de chaque mot 
@@ -45,34 +42,63 @@ private File RepertoireDesFichiersCorpus;
 	private HashMap<String, Integer> hashForFrequencies=new HashMap<>();
 	
 	private int NombreDeDocuments;
-
 	
+	private Set<String> test = new HashSet<>();
+
+	public ArrayList<HashMap<String, Double>> LesEtatsFinal=new ArrayList<HashMap<String,Double>>();
+
 	public  testerHashmap(String repertoire) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
+		
+
+		
 		//reading method works
 		ArrayList<ArrayList<String>> list=FichierAuVecteur(repertoire);
-		/*for (int i=0;i<list.size();i++){
-			System.out.println(list.get(i));
+		
+		/*System.out.println("list des mots apres elimination des mots vides :");
+		for (int i=0;i<list.size();i++){
+			System.out.println(" Document " +(i+1)	+ " "+list.get(i));
 		}*/
 		//Vectorization method works
 		ArrayList<Map<String, Integer>> hash= Vectorisation(VecteurDesFichiers);
-		/*for (int i=0;i<list.size();i++){
-			System.out.println(hash.get(i));
+		
+		/*System.out.println("liste des document apres la phase du vectorisation :");
+		for (int i=0;i<list.size();i++){
+			
+			System.out.println("vecteur "+(i+1)+" "+hash.get(i));
 		}*/
 		//tri method works
 		tri();
-		/*for(int i=0; i<this.listDesMotsTries.size();i++){
-		System.out.println(this.listDesMotsTries.get(i));	
+		/*System.out.println("list des document trie par ordre d'impotance des mots : ");
+
+		for(int i=0; i<this.listDesMotsTries.size();i++){
+			
+		System.out.println("Ducument "+(i+1)+" "+ this.listDesMotsTries.get(i));	
 		}*/
 		//this method works 
-		Etats(4);
+		apprentissage(10);
 		// occurence par niveau works
-		/*for(int i=0;i<listeDesoccurenceParNiveau.size();i++){
+		for(int i=0;i<listeDesoccurenceParNiveau.size();i++){
 			
-			System.out.println(listeDesoccurenceParNiveau);
+			System.out.println(listeDesoccurenceParNiveau.get(i));
 		}
-			System.out.println(hashForFrequencies);*/
+			System.out.println(hashForFrequencies);
 		
+		
+		//System.out.println(this.listeFinal);
 		//testing for the probability method 
+		calcProbabilite(0.25, 10);
+		System.out.println("les Etats du HMM :");
+		/*for(HashMap<String, Double> m: this.LesEtatsFinal ){
+			System.out.println(m.get("أسعار")); 
+			double somme=0;
+			for(String m: this.LesEtatsFinal.get(i).keySet()){
+				somme= somme +this.LesEtatsFinal.get(i).get(m);
+			}
+			System.out.println("Somme Etat "+(i+1)+" "+somme );
+
+		}*/
+		
+		
 		
 	}
 	
@@ -174,7 +200,7 @@ private File RepertoireDesFichiersCorpus;
 	 }
  
  
- private void Etats(int nbrEtat){
+ private void apprentissage(int nbrEtat){
 	
 	 ArrayList<ArrayList<String>> biggerDummyArrayList=new ArrayList<ArrayList<String>>();
 	 
@@ -215,6 +241,12 @@ private File RepertoireDesFichiersCorpus;
 
 	 }
 	  this.SommeFrequence=DummylistOfAllDocuments.size();
+	  Set<String> foo = new HashSet<String>(DummylistOfAllDocuments);
+      this.test=foo;
+      
+      for(String m: foo){
+    	  this.listeFinal.add(m);
+      }
 
 	  for (int i=0; i< DummylistOfAllDocuments.size();i++){
 		 int compteur=0;
@@ -231,7 +263,29 @@ private File RepertoireDesFichiersCorpus;
 	 
 	 
  }
-	
+ private void calcProbabilite(double f,int nbrEtat){
+	 
+	 ArrayList<HashMap<String, Integer>> listDeMapDeProba= new ArrayList();
+	 for(int i=0;i<nbrEtat;i++){
+		 HashMap<String, Double> Etat= new HashMap<>();
+
+		 for(int j =0; j<this.listeFinal.size();j++){
+			String MOT= this.listeFinal.get(j) ;
+			
+			int FrequenceDuMot=this.hashForFrequencies.get(MOT);
+			
+			int frequenceParNiveau=0;
+			if(listeDesoccurenceParNiveau.get(i).containsKey(MOT)){
+				 frequenceParNiveau =listeDesoccurenceParNiveau.get(i).get(MOT);
+			}
+			double ProbabiliteDeMot= f * frequenceParNiveau/this.NombreDeDocuments +(1-f)*FrequenceDuMot/this.SommeFrequence;
+				
+			 Etat.put(MOT, ProbabiliteDeMot);
+
+		 }
+		 this.LesEtatsFinal.add(Etat);
+	 }
+ }
 	public static void main(String[] args) throws UnsupportedEncodingException,FileNotFoundException,IOException {
 		
 		String repertoire= "C:/Users/Hicham/JazeeraEC";
