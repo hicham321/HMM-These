@@ -12,7 +12,39 @@ public class Classification {
 	
 	private ArrayList<String> listFinalDocument= new ArrayList<>();
 	
-	public Classification(File textFile){
+	private ArrayList<Double> listProba= new ArrayList<Double>();
+
+	
+	public Classification()throws FileNotFoundException,UnsupportedEncodingException,IOException{
+		File textFile=new File("C:/Users/Hicham/Desktop/ffff.txt");
+		TreatmentDocument(textFile);
+		categoriser();
+		System.out.println(listProba);
+	    Double maxValue=Collections.max(listProba);
+         for(int i=0;i<listProba.size();i++){
+        	 if(maxValue==listProba.get(i)){
+        		 if(i==0){
+        			System.out.println("la document est de la category : culture"); 
+        		 }
+        		 if(i==1){
+         			System.out.println("la document est de la category : Economie"); 
+         		 }
+        		 if(i==2){
+         			System.out.println("la document est de la category : politique international"); 
+         		 }
+        		 if(i==3){
+         			System.out.println("la document est de la category : politique local"); 
+         		 }
+        		 if(i==4){
+         			System.out.println("la document est de la category : religion"); 
+         		 }
+        		 if(i==5){
+         			System.out.println("la document est de la category : sport"); 
+         		 }       		 
+        		 
+        		 
+        	 }
+         }
 		
 	}
 	
@@ -60,18 +92,18 @@ private void TreatmentDocument(File textFile) throws FileNotFoundException,Unsup
    
 }
 
-public void categoriser (File corpusSport, File corpusEconomie,File corpusReligion,File corpusLocal,File CorpusInternational, File corpusCulture)throws FileNotFoundException , UnsupportedEncodingException ,IOException{
-	String repertoirSport="";
+public void categoriser ()throws FileNotFoundException , UnsupportedEncodingException ,IOException{
+	String repertoirSport="C:/Users/Hicham/loukam1/sport";
 	testerHashmap sport = new testerHashmap(repertoirSport);
-	String repertoirCulture="";
+	String repertoirCulture="C:/Users/Hicham/loukam1/Culture";
 	testerHashmap culture = new testerHashmap(repertoirCulture);
-	String repertoirInternational="";
+	String repertoirInternational="C:/Users/Hicham/loukam1/International";
 	testerHashmap International = new testerHashmap(repertoirInternational);
-	String repertoirLocal="";
+	String repertoirLocal="C:/Users/Hicham/loukam1/Local";
 	testerHashmap Local = new testerHashmap(repertoirLocal);
-	String repertoirReligion="";
+	String repertoirReligion="C:/Users/Hicham/loukam1/Religion";
 	testerHashmap Religion = new testerHashmap(repertoirReligion);
-	String repertoirEconomie ="";
+	String repertoirEconomie ="C:/Users/Hicham/loukam1/economie";
 	testerHashmap Economie = new testerHashmap(repertoirEconomie);
 	double probaSport=1;
 	double probaEcono=1;
@@ -80,7 +112,7 @@ public void categoriser (File corpusSport, File corpusEconomie,File corpusReligi
 	double probaReligion=1;
 	double probacCulture=1;
 
-
+    
 
 
 	for(int i=0; i<10;i++){
@@ -111,22 +143,32 @@ public void categoriser (File corpusSport, File corpusEconomie,File corpusReligi
 		};
 		if (Religion.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
 			String m =this.listFinalDocument.get(i);
-			probacCulture=probacCulture *Religion.LesEtatsFinal.get(i).get(m);
+			probaReligion=probaReligion *Religion.LesEtatsFinal.get(i).get(m);
 		}
-		else{ probacCulture= probaSport*0.00000000001;
+		else{ probaReligion= probaReligion*0.00000000001;
 		};
-		
+		if (Economie.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
+			String m =this.listFinalDocument.get(i);
+			probaEcono=probaEcono *Economie.LesEtatsFinal.get(i).get(m);
+		}
+		else{ probaEcono= probaEcono*0.00000000001;
+		};
 	}
+	listProba.add(probacCulture);
+	listProba.add(probaEcono);
+	listProba.add(probaInterna);
+	listProba.add(probaLocal);
+	listProba.add(probaReligion);
+	listProba.add(probaSport);
 	
+
 }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException , UnsupportedEncodingException ,IOException{
     	
 	long startTime = System.nanoTime();
     //code 
-	String FichText="C:/Users/Hicham/Desktop/stop-words_arabic_1_ar.txt";
-	File fichierAClasser= new File(FichText);
-	
+	Classification cl =new Classification();
 	long endTime = System.nanoTime();
 	long duration = (endTime - startTime);
     System.out.println(duration/1000000 +" miliseconds");
