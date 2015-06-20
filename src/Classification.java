@@ -21,6 +21,26 @@ public class Classification {
 		categoriser();
 		System.out.println(listProba);
 	    Double maxValue=Collections.max(listProba);
+	    for(int i=0;i<listProba.size();i++){
+	    	if(i==0){
+    			System.out.println("la probabilité de la category culture est : "+listProba.get(i)); 
+    		 }
+    		 if(i==1){
+     			System.out.println("la probabilité de la category  Economie est : "+listProba.get(i)); 
+     		 }
+    		 if(i==2){
+     			System.out.println("la probabilité de la category  politique international est: "+listProba.get(i)); 
+     		 }
+    		 if(i==3){
+     			System.out.println("la probabilité de la category  politique local est : "+listProba.get(i)); 
+     		 }
+    		 if(i==4){
+     			System.out.println("la probabilité de la category  religion est : "+listProba.get(i)); 
+     		 }
+    		 if(i==5){
+     			System.out.println("la probabilité de la category  sport est : "+listProba.get(i)); 
+     		 }      
+	    }
          for(int i=0;i<listProba.size();i++){
         	 if(maxValue==listProba.get(i)){
         		 if(i==0){
@@ -171,6 +191,6 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 	Classification cl =new Classification();
 	long endTime = System.nanoTime();
 	long duration = (endTime - startTime);
-    System.out.println(duration/1000000 +" miliseconds");
+    System.out.println("le temps d'entrainement est :"+duration/1000000 +" miliseconds");
     }
 }

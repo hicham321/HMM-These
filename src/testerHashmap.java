@@ -77,17 +77,17 @@ private File RepertoireDesFichiersCorpus;
 		//this method works 
 		apprentissage(10);
 		// occurence par niveau works
-		for(int i=0;i<listeDesoccurenceParNiveau.size();i++){
+		/*for(int i=0;i<listeDesoccurenceParNiveau.size();i++){
 			
 			System.out.println(listeDesoccurenceParNiveau.get(i));
 		}
 			System.out.println(hashForFrequencies);
-		
+		*/
 		
 		//System.out.println(this.listeFinal);
 		//testing for the probability method 
 		calcProbabilite(0.25, 10);
-		System.out.println("les Etats du HMM :");
+		//System.out.println("les Etats du HMM :");
 		/*for(HashMap<String, Double> m: this.LesEtatsFinal ){
 			System.out.println(m.get("أسعار")); 
 			double somme=0;
