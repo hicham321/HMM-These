@@ -1,3 +1,6 @@
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,16 +10,52 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.*;
 
-public class Classification {
+
+public class Classification extends JPanel implements ActionListener{
 	
 	private ArrayList<String> listFinalDocument= new ArrayList<>();
 	
 	private ArrayList<Double> listProba= new ArrayList<Double>();
+	
+	private ArrayList<String>listClasse= new ArrayList<String>();
+	
+	
+	//GUI
+	private JFileChooser filechooser;
+	
+	private JButton ouvrir;
+	
+	private JButton classifie;
+	
+	private File file;
+	
+	
+	
+	int returnVal;
+	
+	public Classification(){
+		this.filechooser= new JFileChooser();
+		this.ouvrir= new JButton("Ouvrir");
+		this.classifie= new JButton("classifie");
+		
+        setPreferredSize(new Dimension(600, 400));
+        setLayout(null);
+        
+        add(ouvrir);
+        add(classifie);
+        
+        ouvrir.setBounds(30, 30, 100, 25);
+        classifie.setBounds(200, 30, 100, 25);
+        ouvrir.addActionListener(this);
+
+		classifie.addActionListener(this);
+	}
 
 	
-	public Classification()throws FileNotFoundException,UnsupportedEncodingException,IOException{
-		File textFile=new File("C:/Users/Hicham/Desktop/ffff.txt");
+	public void ClassificationDocument(File textFile)throws FileNotFoundException,UnsupportedEncodingException,IOException{
+		//File textFile=new File("C:/Users/Hicham/Desktop/ffff.txt");
 		TreatmentDocument(textFile);
 		categoriser();
 		System.out.println(listProba);
@@ -50,13 +89,13 @@ public class Classification {
          			System.out.println("la document est de la category : Economie"); 
          		 }
         		 if(i==2){
-         			System.out.println("la document est de la category : politique international"); 
+         			System.out.println("la document est de la category : politique "); 
          		 }
         		 if(i==3){
-         			System.out.println("la document est de la category : politique local"); 
+         			System.out.println("la document est de la category : santé"); 
          		 }
         		 if(i==4){
-         			System.out.println("la document est de la category : religion"); 
+         			System.out.println("la document est de la category : science"); 
          		 }
         		 if(i==5){
          			System.out.println("la document est de la category : sport"); 
@@ -117,19 +156,19 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 	testerHashmap sport = new testerHashmap(repertoirSport);
 	String repertoirCulture="C:/Users/Hicham/loukam1/Culture";
 	testerHashmap culture = new testerHashmap(repertoirCulture);
-	String repertoirInternational="C:/Users/Hicham/loukam1/International";
-	testerHashmap International = new testerHashmap(repertoirInternational);
-	String repertoirLocal="C:/Users/Hicham/loukam1/Local";
-	testerHashmap Local = new testerHashmap(repertoirLocal);
-	String repertoirReligion="C:/Users/Hicham/loukam1/Religion";
-	testerHashmap Religion = new testerHashmap(repertoirReligion);
+	String repertoirpolitique="C:/Users/Hicham/loukam1/politique";
+	testerHashmap politique = new testerHashmap(repertoirpolitique);
+	String repertoirSante="C:/Users/Hicham/loukam1/Santé";
+	testerHashmap sante = new testerHashmap(repertoirSante);
+	String repertoirscience="C:/Users/Hicham/loukam1/Science";
+	testerHashmap science = new testerHashmap(repertoirscience);
 	String repertoirEconomie ="C:/Users/Hicham/loukam1/economie";
 	testerHashmap Economie = new testerHashmap(repertoirEconomie);
 	double probaSport=1;
 	double probaEcono=1;
-	double probaInterna=1;
-	double probaLocal=1;
-	double probaReligion=1;
+	double probapolitique=1;
+	double probasante=1;
+	double probaScience=1;
 	double probacCulture=1;
 
     
@@ -149,23 +188,23 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 		}
 		else{ probacCulture= probaSport*0.00000000001;
 		};
-		if (International.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
+		if (politique.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
 			String m =this.listFinalDocument.get(i);
-			probaInterna=probaInterna *International.LesEtatsFinal.get(i).get(m);
+			probapolitique=probapolitique *politique.LesEtatsFinal.get(i).get(m);
 		}
-		else{ probaInterna= probaInterna*0.00000000001;
+		else{ probapolitique= probapolitique*0.00000000001;
 		};
-		if (Local.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
+		if (sante.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
 			String m =this.listFinalDocument.get(i);
-			probaLocal=probaLocal *Local.LesEtatsFinal.get(i).get(m);
+			probasante=probasante *sante.LesEtatsFinal.get(i).get(m);
 		}
-		else{ probaLocal= probaLocal*0.00000000001;
+		else{ probasante= probasante*0.00000000001;
 		};
-		if (Religion.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
+		if (science.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
 			String m =this.listFinalDocument.get(i);
-			probaReligion=probaReligion *Religion.LesEtatsFinal.get(i).get(m);
+			probaScience=probaScience *science.LesEtatsFinal.get(i).get(m);
 		}
-		else{ probaReligion= probaReligion*0.00000000001;
+		else{ probaScience= probaScience*0.00000000001;
 		};
 		if (Economie.LesEtatsFinal.get(i).containsKey(this.listFinalDocument.get(i))){
 			String m =this.listFinalDocument.get(i);
@@ -176,9 +215,9 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 	}
 	listProba.add(probacCulture);
 	listProba.add(probaEcono);
-	listProba.add(probaInterna);
-	listProba.add(probaLocal);
-	listProba.add(probaReligion);
+	listProba.add(probapolitique);
+	listProba.add(probasante);
+	listProba.add(probaScience);
 	listProba.add(probaSport);
 	
 
@@ -188,9 +227,53 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
     	
 	long startTime = System.nanoTime();
     //code 
-	Classification cl =new Classification();
+	//Classification cl =new Classification();
+	JFrame frame = new JFrame("My GUI");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.getContentPane().add(new Classification());
+    frame.pack();
+    frame.setVisible(true);
+	
+	
 	long endTime = System.nanoTime();
 	long duration = (endTime - startTime);
-    System.out.println("le temps d'entrainement est :"+duration/1000000 +" miliseconds");
+    System.out.println("le temps de traitement est :"+duration/1000000 +" miliseconds");
     }
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == ouvrir){
+            returnVal = filechooser.showOpenDialog(null);
+            if(returnVal == JFileChooser.APPROVE_OPTION){
+                    file = filechooser.getSelectedFile();
+                      
+            }
+            }
+		if(e.getSource() == classifie){
+			try {
+				ClassificationDocument(file);
+				listClasse.add("Culture");
+				listClasse.add("Economie");
+				listClasse.add("Politique");
+				listClasse.add("Santé");
+				listClasse.add("Science");
+				listClasse.add("Sport");
+				
+			    Double maxValue=Collections.max(listProba);
+                int index=0;
+				for(int i=0;i<listProba.size();i++){
+					if(maxValue==listProba.get(i)){
+					index =i;	
+					}
+				}
+				JOptionPane.showMessageDialog(null, "la classe du document choisi est :"+"  "+listClasse.get(index));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+                   
+	}
 }

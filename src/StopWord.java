@@ -172,7 +172,7 @@ public class StopWord   {
 		// affichage des mot finale
 		for(int i=0; i<list.size();i++){
 			
-		System.out.println(list.get(i));	
+		System.out.print(list.get(i));	
 		}
 	   
 	}
