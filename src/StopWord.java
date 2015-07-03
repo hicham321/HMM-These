@@ -30,6 +30,8 @@ public class StopWord   {
 	
 	private ArrayList<String> ListeDesStopWord;
 	
+	public int nombredemotvides=0;
+	
 	
 	public StopWord(File fichiertext) throws IOException,FileNotFoundException,UnsupportedEncodingException{
 		
@@ -122,7 +124,6 @@ public class StopWord   {
 		
 		ArrayList<String> ListeDesMotsFinale= new ArrayList<String>();
 		
-		
 		for(int i=0; i<this.ListeDesMots.size();i++){
 			Boolean StopWordTrouver=false;
 
@@ -130,6 +131,7 @@ public class StopWord   {
 				//la condition d'elemination
 				if(this.ListeDesStopWord.get(j).equals(ListeDesMots.get(i)) ) {
 				    	StopWordTrouver=true;
+				    	this.nombredemotvides++;
 				    	break;
 				}
 				

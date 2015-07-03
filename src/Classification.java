@@ -1,8 +1,10 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -29,28 +31,47 @@ public class Classification extends JPanel implements ActionListener{
 	
 	private JButton classifie;
 	
+	private JButton stats;
+	
+	private JTextArea EspaceTxt;
+	
+	private JScrollPane jp;
+	
 	private File file;
 	
 	
 	
 	int returnVal;
 	
+	private int nbrMotVide;
+	
+	private long duration;
+	
 	public Classification(){
 		this.filechooser= new JFileChooser();
 		this.ouvrir= new JButton("Ouvrir");
 		this.classifie= new JButton("classifie");
+		this.stats= new JButton("Statistiques");
+		this.EspaceTxt= new JTextArea();
+		//
+		this.jp = new JScrollPane(EspaceTxt);
 		
         setPreferredSize(new Dimension(600, 400));
         setLayout(null);
         
         add(ouvrir);
         add(classifie);
-        
+        add(stats);
+        add(EspaceTxt);
         ouvrir.setBounds(30, 30, 100, 25);
         classifie.setBounds(200, 30, 100, 25);
+        stats.setBounds(370, 30, 100, 25);
+        EspaceTxt.setBounds(120, 90, 350, 250);
         ouvrir.addActionListener(this);
 
 		classifie.addActionListener(this);
+		
+		stats.addActionListener(this);
 	}
 
 	
@@ -68,13 +89,13 @@ public class Classification extends JPanel implements ActionListener{
      			System.out.println("la probabilité de la category  Economie est : "+listProba.get(i)); 
      		 }
     		 if(i==2){
-     			System.out.println("la probabilité de la category  politique international est: "+listProba.get(i)); 
+     			System.out.println("la probabilité de la category  politique : "+listProba.get(i)); 
      		 }
     		 if(i==3){
-     			System.out.println("la probabilité de la category  politique local est : "+listProba.get(i)); 
+     			System.out.println("la probabilité de la category  santé : "+listProba.get(i)); 
      		 }
     		 if(i==4){
-     			System.out.println("la probabilité de la category  religion est : "+listProba.get(i)); 
+     			System.out.println("la probabilité de la category  science est : "+listProba.get(i)); 
      		 }
     		 if(i==5){
      			System.out.println("la probabilité de la category  sport est : "+listProba.get(i)); 
@@ -111,7 +132,9 @@ private void TreatmentDocument(File textFile) throws FileNotFoundException,Unsup
 	
 	StopWord st =new StopWord(textFile);
 	
+	
 	ArrayList<String>list=st.EliminerStopWord();
+	this.nbrMotVide= st.nombredemotvides;
 	//etape de victorization
 	Map <String,Integer> mapfortext=new HashMap<String,Integer>();
 	
@@ -228,7 +251,7 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 	long startTime = System.nanoTime();
     //code 
 	//Classification cl =new Classification();
-	JFrame frame = new JFrame("My GUI");
+	JFrame frame = new JFrame("Interface De Classification");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.getContentPane().add(new Classification());
     frame.pack();
@@ -246,12 +269,29 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 		if(e.getSource() == ouvrir){
             returnVal = filechooser.showOpenDialog(null);
             if(returnVal == JFileChooser.APPROVE_OPTION){
+            	    EspaceTxt.setText(null);
                     file = filechooser.getSelectedFile();
-                      
+                    try {
+						BufferedReader br = new BufferedReader(new FileReader(file));
+						String currentLine;
+						 while((currentLine = br.readLine()) != null){
+							 EspaceTxt.append(currentLine +"\n");
+                     }
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
             }
             }
+            
+            
 		if(e.getSource() == classifie){
 			try {
+				long startTime = System.nanoTime();
+
 				ClassificationDocument(file);
 				listClasse.add("Culture");
 				listClasse.add("Economie");
@@ -267,11 +307,18 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 					index =i;	
 					}
 				}
-				JOptionPane.showMessageDialog(null, "la classe du document choisi est :"+"  "+listClasse.get(index));
+				JOptionPane.showMessageDialog(null, "la classe du document choisis est :"+"  "+listClasse.get(index));
+				long endTime = System.nanoTime();
+				 duration = (endTime - startTime);
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		}
+		if(e.getSource() == stats){
+			JOptionPane.showMessageDialog(null,"quelque statistique sur la classification :"+"\n"+"\n"+ "Mot vide eliminé: "+nbrMotVide +"\n"+"\n"+"la probabilité de la category culture est : "+listProba.get(0)+"\n"+"la probabilité de la category Economie est : "+listProba.get(1)+"\n"+"la probabilité de la category Politique est : "+listProba.get(2)+"\n"+"la probabilité de la category Santé est : "+listProba.get(3)+"\n"+"la probabilité de la category Science est : "+listProba.get(4)+"\n"+"la probabilité de la category Sport est : "+listProba.get(5)+"\n"+"\n"+"Le temp de la classification est : "+this.duration/1000000+" milliseconde");
+			
 		}
 		
                    

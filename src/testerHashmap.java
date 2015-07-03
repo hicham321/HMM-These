@@ -54,26 +54,26 @@ private File RepertoireDesFichiersCorpus;
 		//reading method works
 		ArrayList<ArrayList<String>> list=FichierAuVecteur(repertoire);
 		
-		/*System.out.println("list des mots apres elimination des mots vides :");
+		System.out.println("list des mots apres elimination des mots vides :");
 		for (int i=0;i<list.size();i++){
 			System.out.println(" Document " +(i+1)	+ " "+list.get(i));
-		}*/
+		}
 		//Vectorization method works
 		ArrayList<Map<String, Integer>> hash= Vectorisation(VecteurDesFichiers);
 		
-		/*System.out.println("liste des document apres la phase du vectorisation :");
+		System.out.println("liste des document apres la phase du vectorisation :");
 		for (int i=0;i<list.size();i++){
 			
 			System.out.println("vecteur "+(i+1)+" "+hash.get(i));
-		}*/
+		}
 		//tri method works
 		tri();
-		/*System.out.println("list des document trie par ordre d'impotance des mots : ");
+		System.out.println("list des document trie par ordre d'impotance des mots : ");
 
 		for(int i=0; i<this.listDesMotsTries.size();i++){
 			
 		System.out.println("Ducument "+(i+1)+" "+ this.listDesMotsTries.get(i));	
-		}*/
+		}
 		//this method works 
 		apprentissage(10);
 		// occurence par niveau works
