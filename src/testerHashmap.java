@@ -12,7 +12,6 @@ import java.util.Set;
 
 
 public class testerHashmap {
-private File RepertoireDesFichiersCorpus;
 	
 	
 	// list des vecteur de chaque document

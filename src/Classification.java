@@ -277,6 +277,7 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 						 while((currentLine = br.readLine()) != null){
 							 EspaceTxt.append(currentLine +"\n");
                      }
+						 
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -293,6 +294,7 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 				long startTime = System.nanoTime();
 
 				ClassificationDocument(file);
+				
 				listClasse.add("Culture");
 				listClasse.add("Economie");
 				listClasse.add("Politique");
