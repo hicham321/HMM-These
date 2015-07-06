@@ -3,9 +3,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +22,10 @@ import javax.swing.*;
 
 
 public class Classification extends JPanel implements ActionListener{
+	
+	private FileOutputStream ecritureFich;
+	
+	private OutputStreamWriter redacteur;
 	
 	private ArrayList<String> listFinalDocument= new ArrayList<>();
 	
@@ -176,7 +186,20 @@ private void TreatmentDocument(File textFile) throws FileNotFoundException,Unsup
 
 public void categoriser ()throws FileNotFoundException , UnsupportedEncodingException ,IOException{
 	String repertoirSport="C:/Users/Hicham/loukam1/sport";
+	File sportFichier= new File("le fichier de donn�e");
 	testerHashmap sport = new testerHashmap(repertoirSport);
+	// pour lire les donn� directement apres la lecture
+	// site : http://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the
+	this.ecritureFich= new FileOutputStream(sportFichier) ;
+	
+	 for(HashMap<String, Double> etat: sport.LesEtatsFinal){
+	    	
+	    	this.redacteur=new OutputStreamWriter(this.ecritureFich);
+	    	ObjectOutputStream oos = new ObjectOutputStream(ecritureFich);
+	    	oos.writeObject(etat);
+	    	oos.close();
+	    }
+	
 	String repertoirCulture="C:/Users/Hicham/loukam1/Culture";
 	testerHashmap culture = new testerHashmap(repertoirCulture);
 	String repertoirpolitique="C:/Users/Hicham/loukam1/politique";
@@ -187,6 +210,17 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 	testerHashmap science = new testerHashmap(repertoirscience);
 	String repertoirEconomie ="C:/Users/Hicham/loukam1/economie";
 	testerHashmap Economie = new testerHashmap(repertoirEconomie);
+	
+	
+	    for(HashMap<String, Double> etat: sport.LesEtatsFinal){
+	    	
+	    	
+	    }
+	
+	
+	
+	
+	
 	double probaSport=1;
 	double probaEcono=1;
 	double probapolitique=1;
