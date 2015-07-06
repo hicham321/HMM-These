@@ -192,13 +192,7 @@ public void categoriser ()throws FileNotFoundException , UnsupportedEncodingExce
 	// site : http://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the
 	this.ecritureFich= new FileOutputStream(sportFichier) ;
 	
-	 for(HashMap<String, Double> etat: sport.LesEtatsFinal){
-	    	
-	    	this.redacteur=new OutputStreamWriter(this.ecritureFich);
-	    	ObjectOutputStream oos = new ObjectOutputStream(ecritureFich);
-	    	oos.writeObject(etat);
-	    	oos.close();
-	    }
+	
 	
 	String repertoirCulture="C:/Users/Hicham/loukam1/Culture";
 	testerHashmap culture = new testerHashmap(repertoirCulture);
